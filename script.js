@@ -20,7 +20,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-console.log("All connected yiiihaaaa");
+console.log("All connected yiiihaaaafeur");
 
 // 3. Récupération des éléments HTML
 const emailInput = document.getElementById('email');
