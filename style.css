@@ -5,13 +5,43 @@ button { padding: 10px; cursor: pointer; border: none; border-radius: 4px; backg
 #btn-signup { background: #28a745; margin-right: 5px; }
 #message { margin-top: 10px; font-size: 0.9em; color: red; }
 
-
+/* CSS of the links */
 
 a {
     display: inline-block;
     padding: 10px 20px;
     border-radius: 10px;
-    background-color: #2600ff;
+    background-color: #629ebc;
     color: #fffefe;
     transition: background-color 0.3 ease;
+    margin: 20px;
+    text-decoration-line: none;
+}
+
+a:hover {
+    background-color: #4a7a9c;
+}
+
+/* CSS of the header */
+/* Ajouter la photo de Elder Risk dans le header des html */
+header {
+    background-color: #76b4d3;
+    color: #fffefe;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+
+/* CSS of the footer */
+footer {
+    background-color: #76b4d3;
+    color: #fffefe;
+    text-align: center;
+    padding: 30px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
