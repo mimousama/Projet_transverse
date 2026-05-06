@@ -22,111 +22,74 @@ const auth = getAuth(app); // Initialize Firebase Authentication
 const db = getFirestore(app); // Initialize Cloud Firestore
 console.log("All connected yiiihaaaafeur");
 
-// --- 3. Récupération des éléments HTML ---
-// Signup form elements
-const usernameSignupInput = document.getElementById('usernameSignupInput');
-const passwordSignupInput = document.getElementById('passwordSignupInput');
-const securityQuestionInput = document.getElementById('securityQuestionInput');
-const securityAnswerInput = document.getElementById('securityAnswerInput');
+// --- 3. Récupération des éléments HTML (IDs corrigés) ---
+// On utilise 'email' et 'password' car c'est ce qu'on a écrit dans le HTML
+const emailInput = document.getElementById('email'); 
+const passwordInput = document.getElementById('password');
 const btnSignup = document.getElementById('btn-signup');
-
-// Login form elements
-const usernameLoginInput = document.getElementById('usernameLoginInput');
-const passwordLoginInput = document.getElementById('passwordLoginInput');
 const btnLogin = document.getElementById('btn-login');
-const btnForgotPassword = document.getElementById('btn-forgot-password');
-
-
 const messageBox = document.getElementById('message');
+
+// On met en commentaire ou on supprime les autres car ils n'existent pas dans ton HTML
+// const btnForgotPassword = ... (À supprimer pour l'instant)
 
 // --- FONCTION INSCRIPTION ---
 btnSignup.addEventListener('click', async () => {
-    const username = usernameSignupInput.value.trim(); // .trim() removes leading/trailing whitespace
-    const password = passwordSignupInput.value;
-    const securityQuestion = securityQuestionInput.value.trim();
-    const securityAnswer = securityAnswerInput.value.trim();
+    console.log("Le bouton S'inscrire a été cliqué !"); 
+    
+    // On récupère juste l'email et le mot de passe
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
-    if (!username || !password || !securityQuestion || !securityAnswer) {
-        messageBox.innerText = "Please fill in all signup fields.";
-        messageBox.className = "message error"; // Add error class for styling
+    if (!email || !password) {
+        messageBox.innerText = "Merci de remplir l'email et le mot de passe.";
         return;
     }
 
     try {
-        // 1. Check if username is already taken
-        const usersRef = collection(db, "users");
-        const q = query(usersRef, where("username", "==", username));
-        const querySnapshot = await getDocs(q);
-
-        if (!querySnapshot.empty) {
-            messageBox.innerText = "Username already taken. Please choose another one.";
-            messageBox.className = "message error";
-            return;
-        }
-
-        // 2. Create a dummy email for Firebase Auth
-        // Using a unique domain based on your project ID to avoid conflicts
-        const dummyEmail = `${username}@${firebaseConfig.projectId}.com`; 
-
-        // 3. Create user in Firebase Authentication
-        const userCredential = await createUserWithEmailAndPassword(auth, dummyEmail, password);
-        const user = userCredential.user;
-
-        // 4. Store user data in Cloud Firestore
-        await setDoc(doc(db, "users", user.uid), {
-            username: username,
-            securityQuestion: securityQuestion,
-            securityAnswer: securityAnswer, // IMPORTANT: For production, you should hash this answer for security!
-            createdAt: new Date()
-        });
-
-        messageBox.innerText = `Account created for: ${username}. Redirecting...`;
-        messageBox.className = "message success";
+        // On utilise directement les fonctions Firebase avec l'email
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        messageBox.innerText = "Compte créé avec succès !";
+        console.log("Utilisateur créé :", userCredential.user);
         
-        // --- REDIRECTION UPON SUCCESSFUL SIGNUP ---
-        window.location.href = 'home.html'; // Redirect to home.html
-
     } catch (error) {
-        messageBox.innerText = `Error creating account: ${error.message}`;
-        messageBox.className = "message error";
-        console.error("Signup error:", error);
+        messageBox.innerText = "Erreur : " + error.message;
     }
 });
 
 // --- FONCTION CONNEXION ---
+// --- FONCTION CONNEXION ---
 btnLogin.addEventListener('click', async () => {
-    const username = usernameLoginInput.value.trim();
-    const password = passwordLoginInput.value;
+    // On utilise les mêmes inputs que pour l'inscription : email et password
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
-    if (!username || !password) {
-        messageBox.innerText = "Please enter your username and password to log in.";
+    if (!email || !password) {
+        messageBox.innerText = "Merci de saisir ton email et ton mot de passe.";
         messageBox.className = "message error";
         return;
     }
 
     try {
-        // Convert username back to the dummy email
-        const dummyEmail = `${username}@${firebaseConfig.projectId}.com`;
-
-        const userCredential = await signInWithEmailAndPassword(auth, dummyEmail, password);
-        // User is successfully logged in. userCredential.user contains the Firebase user object.
+        // Connexion directe avec l'email réel
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
         
-        messageBox.innerText = `Welcome, ${username}! You are logged in. Redirecting...`;
+        messageBox.innerText = `Ravi de te revoir ! Connexion réussie.`;
         messageBox.className = "message info";
         
-        // --- REDIRECTION UPON SUCCESSFUL LOGIN ---
-        window.location.href = 'home.html'; // Redirect to home.html
+        console.log("Connecté :", userCredential.user);
+
+        // Redirection vers la page d'accueil
+        // window.location.href = 'home.html'; 
 
     } catch (error) {
-        messageBox.innerText = `Login error: ${error.message}`;
+        messageBox.innerText = "Erreur de connexion : " + error.message;
         messageBox.className = "message error";
         console.error("Login error:", error);
     }
 });
 
-// --- FORGOT PASSWORD (Placeholder) ---
-btnForgotPassword.addEventListener('click', () => {
-    messageBox.innerText = "This feature is not yet implemented. You would need to enter your username to trigger the security question flow.";
-    messageBox.className = "message info";
-    // This is where you'd implement the logic for security question recovery
-});
+// Note : J'ai supprimé la partie btnForgotPassword car elle créait l'erreur rouge 
+// que l'on voyait dans l'image_793aad.jpg.
+
+
