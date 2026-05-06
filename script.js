@@ -2,24 +2,27 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js"; // Make sure to import auth functions
-import { getFirestore, collection, query, where, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js"; // Import Firestore functions
+import { getFirestore, collection, query, where, getDocs, setDoc, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js"; //
+import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAHf39NnMJDAZ-t8ZZx-Ae17Yy0pb4FiNI",
   authDomain: "elderisk.firebaseapp.com",
+  databaseURL: "https://elderisk-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "elderisk",
   storageBucket: "elderisk.firebasestorage.app",
   messagingSenderId: "995844817153",
   appId: "1:995844817153:web:306c5cb36e6d2a08851b00",
   measurementId: "G-ETL1WVHZRZ"
+  
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app); // Note: Analytics might require proper setup/consent for full functionality
 const auth = getAuth(app); // Initialize Firebase Authentication
-const db = getFirestore(app); // Initialize Cloud Firestore
+const db = getDatabase(app); // Initialize Realtime Database
 console.log("All connected yiiihaaaafeur");
 
 // --- 3. Récupération des éléments HTML (IDs corrigés) ---
@@ -85,11 +88,51 @@ btnLogin.addEventListener('click', async () => {
     } catch (error) {
         messageBox.innerText = "Erreur de connexion : " + error.message;
         messageBox.className = "message error";
+        passwordInput.value = ""; // Efface le champ mot de passe pour plus de sécurité
         console.error("Login error:", error);
     }
 });
 
-// Note : J'ai supprimé la partie btnForgotPassword car elle créait l'erreur rouge 
-// que l'on voyait dans l'image_793aad.jpg.
+
+
+// On récupère les éléments
+const testButton = document.getElementById('testbutton');
+const testData = document.getElementById('testdata');
+
+// On branche l'événement
+testButton.addEventListener('click', () => {
+    const valeur = testData.value;
+    console.log("Tentative de sauvegarde pour :", valeur);
+    
+    // On appelle ta fonction de sauvegarde
+    sauvegarderScore(valeur);
+});
+
+// Ta fonction sauvegarderScore (assure-toi qu'elle est bien définie dans script.js)
+async function sauvegarderScore(score) {
+    const user = auth.currentUser;
+
+    if (user) {
+        // On crée une référence vers l'endroit où on veut ranger le score
+        // Ici : users / ID_DE_L_UTILISATEUR / scores
+        const userScoresRef = ref(db, 'users/' + user.uid + '/scores');
+        
+        // "push" permet de rajouter un score à la liste sans effacer les anciens
+        const newScoreRef = push(userScoresRef);
+
+        try {
+            await set(newScoreRef, {
+                valeur: score,
+                date: new Date().toLocaleString()
+            });
+            alert("Score de " + score + " enregistré dans la Realtime Database !");
+        } catch (error) {
+            console.error("Erreur :", error);
+            alert("Erreur lors de la sauvegarde.");
+        }
+    } else {
+        alert("Connecte-toi d'abord !");
+    }
+}
 
 
