@@ -1,0 +1,97 @@
+/* General Page Layout */
+#test_body {     
+    font-family: sans-serif; 
+    display: flex; 
+    flex-direction: column; /* Stacks everything vertically */
+    align-items: center;    /* Centers everything horizontally */
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4; 
+    min-height: 100vh;
+}
+
+/* Header & Footer Fixing */
+header {
+    background-color: #76b4d3;
+    width: 100%;
+    z-index: 1000; 
+    padding: 15px 0;
+    display: flex;         /* Makes links horizontal */
+    justify-content: center;
+    gap: 20px;             /* Space between links */
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    background-color: #629ebc;
+    border-radius: 8px;
+}
+
+footer {
+    background-color: #76b4d3;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Quiz Container Styling */
+#quiz-container { 
+    display: block; 
+    margin-top: 20px; 
+    background: white;
+    padding: 30px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 450px;
+}
+
+/* Question & Radio Button Alignment */
+.question-block { 
+    margin-bottom: 25px; 
+}
+
+.question-title { 
+    font-weight: bold; 
+    font-size: 1.1em;
+    margin-bottom: 12px; 
+}
+
+
+.question-block label {
+    display: flex;         
+    align-items: center;   
+    gap: 12px;             
+    padding: 8px;
+    padding-left: 15%;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.question-block label:hover {
+    background-color: #f0f7fa;
+}
+
+/* Ensure radio buttons don't inherit large widths */
+input[type="radio"] {
+    width: auto;           
+    margin: 0;
+    cursor: pointer;
+
+}
+
+/* Submit Button */
+#submit-btn { 
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white; 
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+}

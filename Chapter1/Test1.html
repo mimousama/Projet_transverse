@@ -1,32 +1,76 @@
 <!DOCTYPE html> <!-- HTML Version 5-->
 <html lang="en"> <!-- Specify language for browser-->
- <head> <!-- HTML document header -->
- <title>Elderisk Home page</title> <!-- Tells the browser what title you give your page -->
- <meta charset="UTF-8"> <!-- specifies character encoding to UTF-8-->
- <link rel="stylesheet" href="../style.css">
- </head><!-- End of header tag -->
- <body><!-- Start of web page code -->
-<header>
-    <a href="../Home.html">HOME PAGE</a><br>
-    <a href="Class1.html">CLASS</a><br>
-    <a href="Correction1.html">CORRECTION</a>
 
+ <head> <!-- HTML document header -->
+    <title>Elderisk Home page</title> <!-- Tells the browser what title you give your page -->
+    <meta charset="UTF-8"> <!-- specifies character encoding to UTF-8-->
+    <link rel="stylesheet" href="../Css/quiz.css">
+    <script type="module" src="../Js/quiz.js"></script>
+ </head><!-- End of header tag -->
+
+
+ <body id="test_body"><!-- Start of web page code -->
+
+    <header>
+        <a href="../Home.html">HOME PAGE</a>
+        <a href="Class1.html">CLASS</a>
+        <a href="Correction1.html">CORRECTION</a>
+    </header>
+
+    <h1><strong>Quiz 1</strong></h1>
+    <h2><strong>Are you ready ? Let's test your knowledge on phishing!</strong></h2>
+                                           
+    <div id="quiz-container">
+        <form id="quiz-form">
+            <!-- Question 1 -->
+            <div class="question-block">
+                <div class="question-title">Question 1 : <br> Is it possible to imitate perfectly a known email of a big organisation like the "Assurance maladie"?</div>
+                <label><input type="radio" name="q1" value="correct"> Yes it is</label>
+                <label><input type="radio" name="q1" value="wrong"> No, it is not possible</label>
+                <label><input type="radio" name="q1" value="wrong"> It is possible but never used</label>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-block">
+                <div class="question-title">Question 2 : <br> What is the main goal of a phishing attack?</div>
+                <label><input type="radio" name="q2" value="wrong"> To spread malware</label>
+                <label><input type="radio" name="q2" value="correct"> To steal personal information</label>
+                <label><input type="radio" name="q2" value="wrong"> To delete files</label>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-block">
+                <div class="question-title">Question 3 : <br> What is a common tactic used in phishing emails?</div>
+                <label><input type="radio" name="q3" value="wrong"> Sending precise information to be trusted</label>
+                <label><input type="radio" name="q3" value="wrong"> Using a calm tone to be convincing</label>
+                <label><input type="radio" name="q3" value="correct"> Impersonating a trusted sender with an urgent tone</label>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-block">
+                <div class="question-title">Question 4 : <br> What is the primary purpose of a phishing email?</div>
+                <label><input type="radio" name="q4" value="correct"> To trick the recipient into using sensitive information and steal it</label>
+                <label><input type="radio" name="q4" value="wrong"> To send unwanted advertisements as much as they want</label>
+                <label><input type="radio" name="q4" value="wrong"> To distribute software updates</label>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question-block">
+                <div class="question-title">Question 5 : <br> Are attached files always safe to open?</div>
+                <label><input type="radio" name="q5" value="wrong"> Yes, they are always safe</label>
+                <label><input type="radio" name="q5" value="correct"> No, they can be malicious</label>
+                <label><input type="radio" name="q5" value="wrong"> It depends on the file type</label>
+            </div>
+
+            <button type="button" id="submit-btn">Submit Quiz</button>
+        </form>
+        <div id="result"></div>
+    </div>
     
 
-</header>
-
-<form method="post" name="Test" action="#" class="box" id="TestId" onsubmit="return false">
-
-    <fieldset id="information">
-        <legend>Test for Chapter1</legend>
-        
-    </fieldset>
-
-</form>
 
 
-    <a href="../Home.html">HOME PAGE</a><br>
-    <a href="Correction1.html">CORRECTION </a>
+
  </body><!-- End of web page code -->
 
  <footer><!--Start of Footer-->

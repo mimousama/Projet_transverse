@@ -130,3 +130,8 @@ btnForgotPassword.addEventListener('click', () => {
     messageBox.className = "message info";
     // This is where you'd implement the logic for security question recovery
 });
+
+
+
+
+

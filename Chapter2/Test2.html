@@ -1,10 +1,73 @@
 <!DOCTYPE html> <!-- HTML Version 5-->
 <html lang="en"> <!-- Specify language for browser-->
+
  <head> <!-- HTML document header -->
- <title>Elderisk Home page</title> <!-- Tells the browser what title you give your page -->
- <meta charset="UTF-8"> <!-- specifies character encoding to UTF-8-->
+    <title>Elderisk Home page</title> <!-- Tells the browser what title you give your page -->
+    <meta charset="UTF-8"> <!-- specifies character encoding to UTF-8-->
+    <link rel="stylesheet" href="../Css/quiz.css">
+    <script type="module" src="../Js/quiz.js"></script>
  </head><!-- End of header tag -->
- <body><!-- Start of web page code -->
+
+
+ <body id="test_body"><!-- Start of web page code -->
+
+    <header>
+        <a href="../Home.html">HOME PAGE</a>
+        <a href="Class2.html">CLASS</a>
+        <a href="Correction2.html">CORRECTION</a>
+    </header>
+
+    <h1><strong>Quiz 2</strong></h1>
+    <h2><strong>Are you ready ? Let's test your knowledge on SMS'risks!</strong></h2>
+                                           
+    <div id="quiz-container">
+        <form id="quiz-form">
+            <!-- Question 1 -->
+            <div class="question-block">
+                <div class="question-title">Question 1</div>
+                <label><input type="radio" name="q1" value="correct"> Answer 1</label>
+                <label><input type="radio" name="q1" value="wrong"> Answer 2</label>
+                <label><input type="radio" name="q1" value="wrong"> Answer 3</label>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-block">
+                <div class="question-title">Question 2</div>
+                <label><input type="radio" name="q2" value="wrong"> Answer 1</label>
+                <label><input type="radio" name="q2" value="correct"> Answer 2</label>
+                <label><input type="radio" name="q2" value="wrong"> Answer 3</label>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-block">
+                <div class="question-title">Question 3</div>
+                <label><input type="radio" name="q3" value="wrong"> Answer 1</label>
+                <label><input type="radio" name="q3" value="wrong"> Answer 2</label>
+                <label><input type="radio" name="q3" value="correct"> Answer 3</label>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-block">
+                <div class="question-title">Question 4</div>
+                <label><input type="radio" name="q4" value="correct"> Answer 1</label>
+                <label><input type="radio" name="q4" value="wrong"> Answer 2</label>
+                <label><input type="radio" name="q4" value="wrong"> Answer 3</label>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question-block">
+                <div class="question-title">Question 5</div>
+                <label><input type="radio" name="q5" value="wrong"> Answer 1</label>
+                <label><input type="radio" name="q5" value="correct"> Answer 2</label>
+                <label><input type="radio" name="q5" value="wrong"> Answer 3</label>
+            </div>
+
+            <button type="button" id="submit-btn">Submit Quiz</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    
+
 
 
 
@@ -12,7 +75,7 @@
 
  <footer><!--Start of Footer-->
 
-
+<a href="">about us</a>
 
  </footer><!--End of Footer-->
 </html><!-- End of document -->

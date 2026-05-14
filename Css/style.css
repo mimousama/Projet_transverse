@@ -37,10 +37,12 @@ header {
 body { font-family: sans-serif; 
     display: flex; 
     justify-content: center; 
-    padding-top: 50px; 
     background: #f4f4f4; 
     padding-top: 100px;
+    padding-bottom: 100px;
+    
 }
+
 
 
 /* CSS of the footer */
@@ -54,3 +56,54 @@ footer {
     width: 100%;
     margin-top: 30px;
 }
+
+
+
+/*Quiz*/
+
+#test_body { 
+    font-family: sans-serif; 
+    display: flex; 
+    flex-direction: column; /* CRUCIAL : Empile les éléments verticalement */
+    align-items: center;    /* Centre les éléments horizontalement */
+    background: #f4f4f4; 
+    margin: 0;
+    padding-top: 120px;     /* Augmenté pour laisser de la place sous le header fixe */
+    padding-bottom: 80px;   /* Espace pour le footer fixe */
+}
+
+#quiz-container { 
+            display: none; /* Hidden by default */
+            margin-top: 20px; 
+            border: 1px solid #ccc; 
+            padding: 20px; 
+            border-radius: 8px; 
+            width: 300px;
+        }
+
+.question-block { 
+    margin-bottom: 20px; }
+
+.question-title { 
+    font-weight: bold; 
+    margin-bottom: 10px; }
+
+button { 
+    border: none;
+    border-radius: 4px;
+    background: #007bff;
+    color: white;
+    cursor: pointer; 
+    padding: 10px 20px; }
+
+#submit-btn { 
+    margin-top: 15px;
+    width: 100%;
+    background-color: #28a745;
+    color: white; 
+    border: none; }
+
+#result { 
+    margin-top: 20px;
+    font-weight: bold;
+    color: #007bff; }
