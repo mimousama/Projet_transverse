@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js"; // Make sure to import auth functions
-import { getFirestore, collection, query, where, getDocs, setDoc, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js"; //
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js"; 
+import { getFirestore, collection, query, where, getDocs, setDoc, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js"; 
 import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
 
 // Your web app's Firebase configuration
@@ -15,109 +15,179 @@ const firebaseConfig = {
   messagingSenderId: "995844817153",
   appId: "1:995844817153:web:306c5cb36e6d2a08851b00",
   measurementId: "G-ETL1WVHZRZ"
-  
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app); // Note: Analytics might require proper setup/consent for full functionality
-const auth = getAuth(app); // Initialize Firebase Authentication
-const db = getDatabase(app); // Initialize Realtime Database
+const analytics = getAnalytics(app); 
+const auth = getAuth(app); 
+const db = getDatabase(app); 
+
+// Ton repère de base pour voir si le script s'est bien lancé
 console.log("All connected yiiihaaaafeur");
 
-// --- 3. Récupération des éléments HTML (IDs corrigés) ---
-// On utilise 'email' et 'password' car c'est ce qu'on a écrit dans le HTML
-const emailInput = document.getElementById('email'); 
-const passwordInput = document.getElementById('password');
-const btnSignup = document.getElementById('btn-signup');
+// --- 3. RÉCUPÉRATION DES ÉLÉMENTS HTML ---
+const emailLogin = document.getElementById('email-login');
+const passwordLogin = document.getElementById('password-login');
 const btnLogin = document.getElementById('btn-login');
+
+const emailSignup = document.getElementById('email-signup');
+const passwordSignup = document.getElementById('password-signup');
+const secretQuestion = document.getElementById('secret-question');
+const secretAnswer = document.getElementById('secret-answer');
+const btnSignup = document.getElementById('btn-signup');
+
+const btnForgot = document.getElementById('btn-forgot-password');
 const messageBox = document.getElementById('message');
 
-// On met en commentaire ou on supprime les autres car ils n'existent pas dans ton HTML
-// const btnForgotPassword = ... (À supprimer pour l'instant)
+console.log("Tous les éléments HTML ont été récupérés par le script.");
 
-// --- FONCTION INSCRIPTION ---
-btnSignup.addEventListener('click', async () => {
-    console.log("Le bouton S'inscrire a été cliqué !"); 
-    
-    // On récupère juste l'email et le mot de passe
-    const email = emailInput.value;
-    const password = passwordInput.value;
-
-    if (!email || !password) {
-        messageBox.innerText = "Merci de remplir l'email et le mot de passe.";
-        return;
-    }
-
-    try {
-        // On utilise directement les fonctions Firebase avec l'email
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        messageBox.innerText = "Compte créé avec succès !";
-        console.log("Utilisateur créé :", userCredential.user);
-        
-    } catch (error) {
-        messageBox.innerText = "Erreur : " + error.message;
-    }
-});
-
-// --- FONCTION CONNEXION ---
-// --- FONCTION CONNEXION ---
+// ==========================================
+// 🟢 FONCTION CONNEXION
+// ==========================================
 btnLogin.addEventListener('click', async () => {
-    // On utilise les mêmes inputs que pour l'inscription : email et password
-    const email = emailInput.value;
-    const password = passwordInput.value;
+    console.log("--- DÉBUT DE LA TENTATIVE DE CONNEXION ---");
+    console.log("Le bouton Connexion a été cliqué !");
+
+    const email = emailLogin.value.trim();
+    const password = passwordLogin.value;
+
+    console.log("Email saisi pour connexion :", email);
 
     if (!email || !password) {
+        console.log("Échec : Il manque l'email ou le mot de passe.");
         messageBox.innerText = "Merci de saisir ton email et ton mot de passe.";
         messageBox.className = "message error";
         return;
     }
 
     try {
-        // Connexion directe avec l'email réel
+        console.log("Envoi de la requête de connexion à Firebase...");
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         
-        messageBox.innerText = `Ravi de te revoir ! Connexion réussie.`;
-        messageBox.className = "message info";
+        // Règle : Si succès, on vide les deux champs
+        emailLogin.value = "";
+        passwordLogin.value = "";
         
-        console.log("Connecté :", userCredential.user);
-
-        // Redirection vers la page d'accueil
-        // window.location.href = 'home.html'; 
+        messageBox.innerText = "Connexion validée !";
+        messageBox.className = "message success";
+        
+        console.log("SUCCÈS - Connecté :", userCredential.user.email);
 
     } catch (error) {
-        messageBox.innerText = "Erreur de connexion : " + error.message;
+        // Règle : Si erreur, on vide SEULEMENT le mot de passe
+        passwordLogin.value = "";
+        messageBox.innerText = "Erreur : Email ou mot de passe incorrect.";
         messageBox.className = "message error";
-        passwordInput.value = ""; // Efface le champ mot de passe pour plus de sécurité
-        console.error("Login error:", error);
+        
+        console.error("ÉCHEC - Login error:", error.code, error.message);
     }
 });
 
+// ==========================================
+// 🔵 FONCTION INSCRIPTION
+// ==========================================
+btnSignup.addEventListener('click', async () => {
+    console.log("--- DÉBUT DE LA TENTATIVE D'INSCRIPTION ---");
+    console.log("Le bouton S'inscrire a été cliqué !"); 
+    
+    const email = emailSignup.value.trim();
+    const password = passwordSignup.value;
+    const question = secretQuestion.value.trim();
+    const answer = secretAnswer.value.trim();
 
+    console.log("Données saisies - Email :", email, "/ Question :", question);
 
-// On récupère les éléments
+    if (!email || !password || !question || !answer) {
+        console.log("Échec : Tous les champs d'inscription ne sont pas remplis.");
+        messageBox.innerText = "Merci de remplir tous les champs !";
+        messageBox.className = "message error";
+        return;
+    }
+
+    try {
+        console.log("Création du compte Firebase en cours...");
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        
+        console.log("Compte créé avec succès ! UID :", user.uid);
+        console.log("Sauvegarde de la question secrète dans la base de données...");
+
+        // Sauvegarde de la question secrète
+        await set(ref(db, 'users/' + user.uid + '/securite'), {
+            question_secrete: question,
+            reponse_secrete: answer.toLowerCase()
+        });
+
+        // Règle : Si succès, on met le message mais on NE VIDE PAS les champs
+        messageBox.innerText = "Inscription validée ! Ton compte est créé.";
+        messageBox.className = "message success";
+        
+        console.log("SUCCÈS - Utilisateur créé et données enregistrées :", user.email);
+
+    } catch (error) {
+        // Règle : Si erreur, on ne vide rien
+        messageBox.innerText = "Erreur d'inscription : " + error.message;
+        messageBox.className = "message error";
+        
+        console.error("ÉCHEC - Erreur d'inscription :", error.code, error.message);
+    }
+});
+
+// ==========================================
+// 🟠 FONCTION MOT DE PASSE OUBLIÉ
+// ==========================================
+btnForgot.addEventListener('click', async () => {
+    console.log("--- TENTATIVE DE RÉINITIALISATION DE MOT DE PASSE ---");
+    console.log("Le bouton Mot de passe oublié a été cliqué !");
+    
+    const email = emailLogin.value.trim();
+    console.log("Email ciblé pour la réinitialisation :", email);
+
+    if (!email) {
+        console.log("Échec : L'email n'a pas été renseigné dans la case de connexion.");
+        messageBox.innerText = "Mets ton email dans la case Connexion, puis clique sur Mot de passe oublié.";
+        messageBox.className = "message error";
+        return;
+    }
+
+    try {
+        console.log("Demande de l'email de réinitialisation à Firebase...");
+        await sendPasswordResetEmail(auth, email);
+        
+        messageBox.innerText = "Un email de réinitialisation a été envoyé à " + email;
+        messageBox.className = "message info";
+        
+        console.log("SUCCÈS - Email de reset envoyé !");
+    } catch (error) {
+        messageBox.innerText = "Erreur : " + error.message;
+        messageBox.className = "message error";
+        
+        console.error("ÉCHEC - Erreur d'envoi du mail de reset :", error.code, error.message);
+    }
+});
+
+// ==========================================
+// 🟣 TES FONCTIONS DE TEST DE BASE DE DONNÉES (inchangées)
+// ==========================================
 const testButton = document.getElementById('testbutton');
 const testData = document.getElementById('testdata');
 
-// On branche l'événement
-testButton.addEventListener('click', () => {
-    const valeur = testData.value;
-    console.log("Tentative de sauvegarde pour :", valeur);
-    
-    // On appelle ta fonction de sauvegarde
-    sauvegarderScore(valeur);
-});
+if (testButton && testData) { 
+    testButton.addEventListener('click', () => {
+        const valeur = testData.value;
+        console.log("Tentative de sauvegarde pour :", valeur);
+        sauvegarderScore(valeur);
+    });
+}
 
-// Ta fonction sauvegarderScore (assure-toi qu'elle est bien définie dans script.js)
 async function sauvegarderScore(score) {
+    console.log("Lancement de la fonction sauvegarderScore...");
     const user = auth.currentUser;
 
     if (user) {
-        // On crée une référence vers l'endroit où on veut ranger le score
-        // Ici : users / ID_DE_L_UTILISATEUR / scores
+        console.log("Utilisateur identifié :", user.uid, "- Préparation de l'enregistrement...");
         const userScoresRef = ref(db, 'users/' + user.uid + '/scores');
-        
-        // "push" permet de rajouter un score à la liste sans effacer les anciens
         const newScoreRef = push(userScoresRef);
 
         try {
@@ -125,14 +195,14 @@ async function sauvegarderScore(score) {
                 valeur: score,
                 date: new Date().toLocaleString()
             });
+            console.log("SUCCÈS - Score enregistré en base de données !");
             alert("Score de " + score + " enregistré dans la Realtime Database !");
         } catch (error) {
-            console.error("Erreur :", error);
+            console.error("ÉCHEC - Erreur lors de la sauvegarde :", error);
             alert("Erreur lors de la sauvegarde.");
         }
     } else {
+        console.log("ÉCHEC - Impossible de sauvegarder, aucun utilisateur n'est connecté.");
         alert("Connecte-toi d'abord !");
     }
 }
-
-
