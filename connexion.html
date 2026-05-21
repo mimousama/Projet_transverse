@@ -83,9 +83,68 @@
             justify-content: center;
             width: 100%;
         }
+
+        .header-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre le bouton déconnexion et la pastille */
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer; /* Transforme le curseur en main au survol */
+}
+
+/* Style du bouton déconnexion */
+.btn-logout {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
+}
+
+.pastille {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Couleurs */
+.status-badge.invite .pastille { background-color: #ff4d4d; }
+.status-badge.invite { color: #ff4d4d; }
+
+.status-badge.connecte .pastille { background-color: #2ecc71; }
+.status-badge.connecte { color: #2ecc71; }
     </style>
 </head>
 <body>
+    <div id="statut-connexion-page" style="display: none; background-color: #e8f5e9; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-family: Arial, sans-serif;">
+        <span id="texte-statut-page" style="color: #2e7d32; font-weight: bold; margin-right: 15px;"></span>
+        <button id="btn-logout-page" style="background-color: #d32f2f; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Déconnexion</button>
+    </div>
+    <a href="testdatabase.html">testdatabase</a><br>
 
     <div class="forms-wrapper">
     <div class="container" id="login-section">
@@ -134,5 +193,6 @@
     <!-- It's good practice to place script tags at the end of the body for performance -->
     <!-- Make sure to save your JavaScript code in a file named `script.js` in the same directory -->
     <script type="module" src="Js/script.js"></script> 
+    <script type="module" src="Js/auth-check.js"></script>
 </body>
 </html>
