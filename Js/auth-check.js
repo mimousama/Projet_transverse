@@ -42,16 +42,16 @@ onAuthStateChanged(auth, (user) => {
         // Si on est sur la page de connexion, on affiche le message de bienvenue et le bouton déconnexion
         if (zoneStatutPage && texteStatutPage) {
             zoneStatutPage.style.display = "block";
-            texteStatutPage.innerText = "Vous êtes connecté avec : " + user.email;
+            texteStatutPage.innerText = "Bonjour ! Vous êtes bien connecté avec : " + user.email;
         }
 
     } else {
-        console.log("Mode invité actif.");
+        console.log("Utilisateur déconnecté.");
 
         // Si la pastille existe sur la page actuelle
         if (badge && texte) {
             badge.className = "status-badge invite";
-            texte.innerText = "Mode Invité";
+            texte.innerText = "Déconnecté";
             badge.onclick = () => {
                 window.location.href = 'connexion.html';
             };
