@@ -30,7 +30,7 @@ header {
     width: 100%;
     z-index: 1000; 
     display: flex;         
-    justify-content: center;          
+    justify-content: center;        
 }
 
 
@@ -43,6 +43,7 @@ body {
     margin: 0px;
     padding: 0px;
     min-height: 100vh;
+    overflow-x: hidden ;
     
 }
 
@@ -55,10 +56,12 @@ footer {
     padding: 30px;
     width: 100%;
     flex : 1;
-    text-align: center;
+    text-align: center;    
 
-    
+}
 
+section{
+    padding : 5%;
 }
 
 

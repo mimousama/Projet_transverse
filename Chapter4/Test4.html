@@ -1,0 +1,67 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <title>Elderisk Home page</title>
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link rel="stylesheet" href="../Css/quiz.css">
+        <script type="module" src="../Js/quiz.js"></script>
+    </head>
+
+    <body id="test_body">
+        <header>
+        <a href="../Home.html">HOME PAGE</a>
+        <a href="Class4.html">CLASS</a>
+        <a href="Correction4.html">CORRECTION</a>
+        </header>
+
+    <h1><strong>Quiz 4</strong></h1>
+    <h2><strong>Are you ready ? Let's test your knowledge on AI Voice Cloning!</strong></h2>
+                                           
+    <div id="quiz-container">
+        <form id="quiz-form">
+            <div class="question-block">
+                <div class="question-title">Question 1 : <br> How much audio does a scammer currently need to clone your voice using AI?</div>
+                <label><input type="radio" name="q1" value="wrong"> Several minutes of clear recording</label>
+                <label><input type="radio" name="q1" value="correct"> Around three seconds of audio</label>
+                <label><input type="radio" name="q1" value="wrong"> An entire phone conversation</label>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">Question 2 : <br> Where do scammers typically get the voice samples to clone your voice?</div>
+                <label><input type="radio" name="q2" value="correct"> From public social media videos or by calling you just to get you to speak</label>
+                <label><input type="radio" name="q2" value="wrong"> Only from stolen government databases</label>
+                <label><input type="radio" name="q2" value="wrong"> By hacking directly into your secure bank accounts</label>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">Question 3 : <br> What is a common scenario used in an AI voice cloning scam?</div>
+                <label><input type="radio" name="q3" value="wrong"> Offering you a free vacation or a lottery prize to click a link</label>
+                <label><input type="radio" name="q3" value="wrong"> Asking you to update your computer software immediately</label>
+                <label><input type="radio" name="q3" value="correct"> Playing the cloned voice of a loved one in a fake emergency to demand urgent money</label>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">Question 4 : <br> What is a recommended way to protect yourself from these scams?</div>
+                <label><input type="radio" name="q4" value="correct"> Let calls from unknown numbers go to voicemail and use call screening tools</label>
+                <label><input type="radio" name="q4" value="wrong"> Answer every call to find out who it is as quickly as possible</label>
+                <label><input type="radio" name="q4" value="wrong"> Post more voice recordings online so your friends know it's really you</label>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">Question 5 : <br> What should you do if someone claiming to be a relative calls from an unknown number in distress?</div>
+                <label><input type="radio" name="q5" value="wrong"> Send the money immediately using cryptocurrency or gift cards</label>
+                <label><input type="radio" name="q5" value="wrong"> Keep them on the phone as long as possible to figure out if it's an AI</label>
+                <label><input type="radio" name="q5" value="correct"> Ask for a pre-established family safe word or hang up and call their known number</label>
+            </div>
+
+            <button type="button" id="submit-btn">Submit Quiz</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <footer>
+    <a href="">about us</a>
+    </footer>
+</body>
+</html>
