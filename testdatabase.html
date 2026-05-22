@@ -5,13 +5,70 @@
     <title>Page test</title>
     
     <link rel="stylesheet" href="style.css">
+    <style>.header-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre le bouton déconnexion et la pastille */
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer; /* Transforme le curseur en main au survol */
+}
+
+/* Style du bouton déconnexion */
+.btn-logout {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
+}
+
+.pastille {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Couleurs */
+.status-badge.invite .pastille { background-color: #ff4d4d; }
+.status-badge.invite { color: #ff4d4d; }
+
+.status-badge.connecte .pastille { background-color: #2ecc71; }
+.status-badge.connecte { color: #2ecc71; }</style>
 </head>
 
 <body>
-
+    <div id="status-connexion" class="status-badge invite">
+    <span class="pastille"></span>
+    <span id="status-texte">Mode Invité</span>
+    </div>
     <input id="testdata">
     <button id="testbutton" onclick="sauvegarderScore(document.getElementById('testdata').value)">Save</button>
     <script type="module" src="script.js"></script>
+    <script type="module" src="Js/auth-check.js"></script>
 
 </body>
 </html>

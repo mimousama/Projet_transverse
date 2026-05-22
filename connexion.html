@@ -83,48 +83,106 @@
             justify-content: center;
             width: 100%;
         }
+
+        .header-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre le bouton déconnexion et la pastille */
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer; /* Transforme le curseur en main au survol */
+}
+
+/* Style du bouton déconnexion */
+.btn-logout {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
+}
+
+.pastille {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Couleurs */
+.status-badge.invite .pastille { background-color: #ff4d4d; }
+.status-badge.invite { color: #ff4d4d; }
+
+.status-badge.connecte .pastille { background-color: #2ecc71; }
+.status-badge.connecte { color: #2ecc71; }
     </style>
 </head>
 <body>
+    <div id="statut-connexion-page" style="display: none; background-color: #e8f5e9; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-family: Arial, sans-serif;">
+        <span id="texte-statut-page" style="color: #2e7d32; font-weight: bold; margin-right: 15px;"></span>
+        <button id="btn-logout-page" style="background-color: #d32f2f; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Déconnexion</button>
+    </div>
+    <a href="testdatabase.html">testdatabase</a><br>
 
     <div class="forms-wrapper">
-        <!-- Signup Form -->
-        <div class="container">
-            <h2>Create an Account</h2>
-            <div>
-                <label for="usernameSignupInput">Username:</label>
-                <input type="text" id="usernameSignupInput" placeholder="Choose a username">
-            </div>
-            <div>
-                <label for="passwordSignupInput">Password:</label>
-                <input type="password" id="passwordSignupInput" placeholder="Enter your password">
-            </div>
-            <div>
-                <label for="securityQuestionInput">Security Question:</label>
-                <input type="text" id="securityQuestionInput" placeholder="e.g., What is your favorite color?">
-            </div>
-            <div>
-                <label for="securityAnswerInput">Security Answer:</label>
-                <input type="text" id="securityAnswerInput" placeholder="Your answer">
-            </div>
-            <button id="btn-signup">Sign Up</button>
-        </div>
-
-        <!-- Login Form -->
-        <div class="container">
-            <h2>Log In</h2>
-            <div>
-                <label for="usernameLoginInput">Username:</label>
-                <input type="text" id="usernameLoginInput" placeholder="Your username">
-            </div>
-            <div>
-                <label for="passwordLoginInput">Password:</label>
-                <input type="password" id="passwordLoginInput" placeholder="Your password">
-            </div>
-            <button id="btn-login">Log In</button>
-            <button id="btn-forgot-password" style="background-color: #ff9800;">Forgot Password?</button>
-        </div>
+    <div class="container" id="login-section">
+        <h2>Se connecter</h2>
+        
+        <label for="email-login">Email :</label>
+        <input type="email" id="email-login" placeholder="Ton adresse email">
+        
+        <label for="password-login">Mot de passe :</label>
+        <input type="password" id="password-login" placeholder="Ton mot de passe">
+        
+        <button id="btn-login">Connexion</button>
+        
+        <button id="btn-forgot-password" style="background-color: transparent; color: #ff9800; border: none; text-decoration: underline; cursor: pointer; margin-top: 10px;">
+            Mot de passe oublié ?
+        </button>
     </div>
+
+    <div class="container" id="signup-section">
+        <h2>S'inscrire</h2>
+        
+        <label for="email-signup">Email :</label>
+        <input type="email" id="email-signup" placeholder="Choisis un email">
+        
+        <label for="password-signup">Mot de passe :</label>
+        <input type="password" id="password-signup" placeholder="Crée un mot de passe">
+        
+        <label for="secret-question">Ta question secrète :</label>
+        <input type="text" id="secret-question" placeholder="Ex: Le nom de mon premier chien ?">
+        
+        <label for="secret-answer">La réponse secrète :</label>
+        <input type="text" id="secret-answer" placeholder="Ta réponse">
+        
+        <button id="btn-signup">S'inscrire</button>
+    </div>
+    </div>
+
+<div id="message" class="message" style="margin-top: 20px; text-align: center; font-weight: bold;"></div>
 
     <!-- Message Display Area -->
     <div class="container" style="max-width: 90%; margin-top: 20px;">
@@ -134,6 +192,7 @@
     <!-- Your JavaScript file will go here -->
     <!-- It's good practice to place script tags at the end of the body for performance -->
     <!-- Make sure to save your JavaScript code in a file named `script.js` in the same directory -->
-    <script type="module" src="script.js"></script> 
+    <script type="module" src="Js/script.js"></script> 
+    <script type="module" src="Js/auth-check.js"></script>
 </body>
 </html>
