@@ -101,7 +101,7 @@ onAuthStateChanged(auth, (user) => {
         // --- CAS : INVITE ---
         if (badge && texte) {
             badge.className = "invite";
-            texte.innerText = "Mode Invité";
+            texte.innerText = "Déconnecté";
             badge.onclick = () => window.location.href = '/connexion.html';
         }
 
