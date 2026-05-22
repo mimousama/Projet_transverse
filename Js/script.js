@@ -1,11 +1,10 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js"; 
 import { getFirestore, collection, query, where, getDocs, setDoc, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js"; 
 import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAHf39NnMJDAZ-t8ZZx-Ae17Yy0pb4FiNI",
   authDomain: "elderisk.firebaseapp.com",
@@ -38,7 +37,8 @@ const secretAnswer = document.getElementById('secret-answer');
 const btnSignup = document.getElementById('btn-signup');
 
 const btnForgot = document.getElementById('btn-forgot-password');
-const messageBox = document.getElementById('message');
+const messageBox1 = document.getElementById('message1');
+const messageBox2 = document.getElementById('message2');
 
 console.log("Tous les éléments HTML ont été récupérés par le script.");
 
@@ -56,8 +56,8 @@ btnLogin.addEventListener('click', async () => {
 
     if (!email || !password) {
         console.log("Échec : Il manque l'email ou le mot de passe.");
-        messageBox.innerText = "Merci de saisir ton email et ton mot de passe.";
-        messageBox.className = "message error";
+        messageBox1.innerText = "Merci de saisir ton email et ton mot de passe.";
+        messageBox1.className = "message error";
         return;
     }
 
@@ -69,16 +69,16 @@ btnLogin.addEventListener('click', async () => {
         emailLogin.value = "";
         passwordLogin.value = "";
         
-        messageBox.innerText = "Connexion validée !";
-        messageBox.className = "message success";
+        messageBox1.innerText = "Connexion validée !";
+        messageBox1.className = "message success";
         
         console.log("SUCCÈS - Connecté :", userCredential.user.email);
 
     } catch (error) {
         // Règle : Si erreur, on vide SEULEMENT le mot de passe
         passwordLogin.value = "";
-        messageBox.innerText = "Erreur : Email ou mot de passe incorrect.";
-        messageBox.className = "message error";
+        messageBox1.innerText = "Erreur : Email ou mot de passe incorrect.";
+        messageBox1.className = "message error";
         
         console.error("ÉCHEC - Login error:", error.code, error.message);
     }
@@ -100,8 +100,8 @@ btnSignup.addEventListener('click', async () => {
 
     if (!email || !password || !question || !answer) {
         console.log("Échec : Tous les champs d'inscription ne sont pas remplis.");
-        messageBox.innerText = "Merci de remplir tous les champs !";
-        messageBox.className = "message error";
+        messageBox2.innerText = "Merci de remplir tous les champs !";
+        messageBox2.className = "message error";
         return;
     }
 
@@ -120,15 +120,15 @@ btnSignup.addEventListener('click', async () => {
         });
 
         // Règle : Si succès, on met le message mais on NE VIDE PAS les champs
-        messageBox.innerText = "Inscription validée ! Ton compte est créé.";
-        messageBox.className = "message success";
+        messageBox2.innerText = "Inscription validée ! Ton compte est créé.";
+        messageBox2.className = "message success";
         
         console.log("SUCCÈS - Utilisateur créé et données enregistrées :", user.email);
 
     } catch (error) {
         // Règle : Si erreur, on ne vide rien
-        messageBox.innerText = "Erreur d'inscription : " + error.message;
-        messageBox.className = "message error";
+        messageBox2.innerText = "Erreur d'inscription : " + error.message;
+        messageBox2.className = "message error";
         
         console.error("ÉCHEC - Erreur d'inscription :", error.code, error.message);
     }
@@ -146,8 +146,8 @@ btnForgot.addEventListener('click', async () => {
 
     if (!email) {
         console.log("Échec : L'email n'a pas été renseigné dans la case de connexion.");
-        messageBox.innerText = "Mets ton email dans la case Connexion, puis clique sur Mot de passe oublié.";
-        messageBox.className = "message error";
+        messageBox1.innerText = "Mets ton email dans la case Connexion, puis clique sur Mot de passe oublié.";
+        messageBox1.className = "message error";
         return;
     }
 
@@ -155,13 +155,13 @@ btnForgot.addEventListener('click', async () => {
         console.log("Demande de l'email de réinitialisation à Firebase...");
         await sendPasswordResetEmail(auth, email);
         
-        messageBox.innerText = "Un email de réinitialisation a été envoyé à " + email;
-        messageBox.className = "message info";
+        messageBox1.innerText = "Un email de réinitialisation a été envoyé à " + email;
+        messageBox1.className = "message info";
         
         console.log("SUCCÈS - Email de reset envoyé !");
     } catch (error) {
-        messageBox.innerText = "Erreur : " + error.message;
-        messageBox.className = "message error";
+        messageBox1.innerText = "Erreur : " + error.message;
+        messageBox1.className = "message error";
         
         console.error("ÉCHEC - Erreur d'envoi du mail de reset :", error.code, error.message);
     }
