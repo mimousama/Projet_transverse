@@ -64,6 +64,25 @@ section{
     padding : 5%;
 }
 
+.div_course:first-of-type{
+    display: flex;
+    justify-content: center;
+}
+
+.div_course{
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 2%;
+}
+
+
+.div_course img {
+    max-width: 50%;
+    height: auto;
+    border-radius: 8px;
+}
+
 
 
 main {
