@@ -127,3 +127,17 @@ button:hover {
     text-align: center;
 }
 .btn-restart:hover { background-color: #218838; }
+
+
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #007bff;
+}
+
+a:hover {
+    background-color: #0056b3;
+}

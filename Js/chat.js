@@ -1,12 +1,12 @@
-
-    // 1. Define the Scenarios and Dialogue Trees
+// 1. Define the Scenarios and Dialogue Trees
     const database = {
         mainMenu: {
             text: "Select a simulation to practice:",
             choices: [
                 { text: "1. Phishing (Bank Alert)", next: "phishing_start" },
                 { text: "2. Smishing (Package Delivery)", next: "smishing_start" },
-                { text: "3. Family Impersonation", next: "family_start" }
+                { text: "3. Family Impersonation", next: "family_start" },
+                { text: "4. AI Voice Cloning (Emergency)", next: "aiclone_start" } // NEW SCENARIO ADDED
             ]
         },
 
@@ -59,6 +59,31 @@
                 { text: "Okay, send me the details.", next: "family_lose" },
                 { text: "Ask a secret family question: 'What is the name of my first dog?'", next: "family_win" }
             ]
+        },
+
+        // --- SCENARIO 4: AI VOICE CLONING (NEW) ---
+        aiclone_start: {
+            stranger: "[Call connected. You hear a 3-second unnatural silence] ... Hello? Grandma/Grandpa? It's me! I was in a terrible car accident and the police are arresting me! Please, you have to help me!",
+            choices: [
+                { text: "Oh my goodness! Are you hurt? What do I need to do?", next: "aiclone_push" },
+                { text: "Ask: 'What is our family safe word?'", next: "aiclone_win" },
+                { text: "Hang up immediately and call their saved phone number.", next: "aiclone_win" }
+            ]
+        },
+        aiclone_push: {
+            stranger: "I have a broken nose, I can't talk long! The police say I need $1,000 for bail right now. Please buy Apple gift cards and read me the numbers on the back so I can get out!",
+            choices: [
+                { text: "Okay, I am going to the store right now, stay on the line.", next: "aiclone_lose" },
+                { text: "Gift cards? The police don't ask for gift cards. [Hang up]", next: "aiclone_win" },
+                { text: "Give me the police officer's badge number.", next: "aiclone_push2" }
+            ]
+        },
+        aiclone_push2: {
+            stranger: "[Voice sounds frantic but lacks breathing pauses] There's no time for that! If you don't give me the gift card numbers in the next 10 minutes, I'm going to prison! Don't you love me?!",
+            choices: [
+                { text: "Fine, I'll go get the cards.", next: "aiclone_lose" },
+                { text: "Hang up and call your loved one directly.", next: "aiclone_win" }
+            ]
         }
     };
 
@@ -82,13 +107,28 @@
     }
 
     function loadNode(nodeId) {
-        // Handle Win/Lose states
+        // Handle Win/Lose states with scenario-specific feedback
         if (nodeId.includes("win")) {
-            showFeedback(true, "Great job! You recognized the scam and protected your personal information. Remember: Banks and legitimate services will never ask for your PIN or rush you over a text message.");
+            let winMessage = "Great job! You recognized the scam and protected your personal information. Remember: Banks and legitimate services will never ask for your PIN or rush you over a text message.";
+            
+            // Custom feedback for the AI Cloning scenario
+            if (nodeId.includes("aiclone")) {
+                winMessage = "Excellent! You spotted the telltale signs of an AI voice clone (the 3-second delay, untraceable gift cards). Hanging up, verifying, and using a Family Safe Word are your best defenses.";
+            }
+            
+            showFeedback(true, winMessage);
             return;
         }
+        
         if (nodeId.includes("lose")) {
-            showFeedback(false, "Oh no! The scammer tricked you. Remember: Never click unknown links, never share your PIN, and always verify urgent requests for money by calling the person's original number.");
+            let loseMessage = "Oh no! The scammer tricked you. Remember: Never click unknown links, never share your PIN, and always verify urgent requests for money by calling the person's original number.";
+            
+            // Custom feedback for the AI Cloning scenario
+            if (nodeId.includes("aiclone")) {
+                loseMessage = "Oh no! The AI voice tricked you. Remember: Scammers use fake emergencies to create panic. The police will never ask for gift cards, and you should always hang up and call your relative directly to verify.";
+            }
+
+            showFeedback(false, loseMessage);
             return;
         }
 
@@ -148,4 +188,3 @@
 
     // Initialize the app on load
     showMainMenu();
-
