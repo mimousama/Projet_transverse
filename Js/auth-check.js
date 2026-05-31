@@ -1,29 +1,26 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 
-// Ta config Firebase exacte
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAHf39NnMJDAZ-t8ZZx-Ae17Yy0pb4FiNI",
-  authDomain: "elderisk.firebaseapp.com",
-  databaseURL: "https://elderisk-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "elderisk",
-  storageBucket: "elderisk.firebasestorage.app",
-  messagingSenderId: "995844817153",
-  appId: "1:995844817153:web:306c5cb36e6d2a08851b00",
-  measurementId: "G-ETL1WVHZRZ"
+    apiKey: "AIzaSyAHf39NnMJDAZ-t8ZZx-Ae17Yy0pb4FiNI",
+    authDomain: "elderisk.firebaseapp.com",
+    databaseURL: "https://elderisk-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "elderisk",
+    storageBucket: "elderisk.firebasestorage.app",
+    messagingSenderId: "995844817153",
+    appId: "1:995844817153:web:306c5cb36e6d2a08851b00",
+    measurementId: "G-ETL1WVHZRZ"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ========================================================
-// 🪄 LA MAGIE : INJECTION AUTOMATIQUE DE LA PASTILLE
-// ========================================================
+
 function injecterPastille() {
-    // Si la pastille existe déjà sur la page, on ne fait rien
+
     if (document.getElementById('status-connexion')) return;
 
-    // Le CSS et le HTML intégrés dans le JavaScript
     const pastilleCode = `
         <style>
             #status-connexion {
@@ -62,21 +59,17 @@ function injecterPastille() {
         
         <div id="status-connexion" class="invite">
             <span class="pastille"></span>
-            <span id="status-texte">Chargement...</span>
+            <span id="status-texte">Loading...</span>
         </div>
     `;
 
-    // On injecte tout ça tout en haut de la page web, de force !
     document.body.insertAdjacentHTML('afterbegin', pastilleCode);
 }
 
-// On lance l'injection de la pastille dès que le script démarre
+
 injecterPastille();
 
 
-// ========================================================
-// 🧠 LE CERVEAU : VÉRIFICATION DE LA CONNEXION
-// ========================================================
 onAuthStateChanged(auth, (user) => {
     const badge = document.getElementById('status-connexion');
     const texte = document.getElementById('status-texte');
@@ -84,37 +77,35 @@ onAuthStateChanged(auth, (user) => {
     const texteStatutPage = document.getElementById('texte-statut-page');
 
     if (user) {
-        // --- CAS : CONNECTÉ ---
+        // IF CONNECTED
         if (badge && texte) {
             badge.className = "connecte";
-            texte.innerText = "Connecté";
+            texte.innerText = "Connected";
             badge.onclick = () => window.location.href = '/connexion.html';
         }
 
-        // Si on est sur la page de connexion (pour le bouton rouge déconnexion)
+
         if (zoneStatutPage && texteStatutPage) {
             zoneStatutPage.style.display = "block";
-            texteStatutPage.innerText = "Vous êtes connecté avec : " + user.email;
+            texteStatutPage.innerText = "You are logged in with: " + user.email;
         }
 
     } else {
-        // --- CAS : INVITE ---
+        // IF INVITED
         if (badge && texte) {
             badge.className = "invite";
-            texte.innerText = "Déconnecté";
+            texte.innerText = "Disconnected";
             badge.onclick = () => window.location.href = '/connexion.html';
         }
 
-        // Si on est sur la page de connexion, on cache la zone de déconnexion
+
         if (zoneStatutPage) {
             zoneStatutPage.style.display = "none";
         }
     }
 });
 
-// ========================================================
-// 🚪 GESTION DU BOUTON DÉCONNEXION (Sur la page connexion.html)
-// ========================================================
+
 document.addEventListener('DOMContentLoaded', () => {
     const btnLogoutPage = document.getElementById('btn-logout-page');
     
@@ -124,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 await signOut(auth);
                 const message1 = document.getElementById('message1'); // Ton ID de message sur la page connexion
                 if(message1) {
-                    message1.innerText = "Vous avez été déconnecté proprement.";
+                    message1.innerText = "You have been successfully logged out.";
                     message1.className = "message info";
                 }
             } catch (error) {

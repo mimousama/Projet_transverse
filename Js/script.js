@@ -1,4 +1,3 @@
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js"; 
@@ -6,14 +5,14 @@ import { getFirestore, collection, query, where, getDocs, setDoc, doc, updateDoc
 import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAHf39NnMJDAZ-t8ZZx-Ae17Yy0pb4FiNI",
-  authDomain: "elderisk.firebaseapp.com",
-  databaseURL: "https://elderisk-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "elderisk",
-  storageBucket: "elderisk.firebasestorage.app",
-  messagingSenderId: "995844817153",
-  appId: "1:995844817153:web:306c5cb36e6d2a08851b00",
-  measurementId: "G-ETL1WVHZRZ"
+    apiKey: "AIzaSyAHf39NnMJDAZ-t8ZZx-Ae17Yy0pb4FiNI",
+    authDomain: "elderisk.firebaseapp.com",
+    databaseURL: "https://elderisk-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "elderisk",
+    storageBucket: "elderisk.firebasestorage.app",
+    messagingSenderId: "995844817153",
+    appId: "1:995844817153:web:306c5cb36e6d2a08851b00",
+    measurementId: "G-ETL1WVHZRZ"
 };
 
 // Initialize Firebase
@@ -22,10 +21,9 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app); 
 const db = getDatabase(app); 
 
-// Ton repère de base pour voir si le script s'est bien lancé
+
 console.log("All connected yiiihaaaafeur");
 
-// --- 3. RÉCUPÉRATION DES ÉLÉMENTS HTML ---
 const emailLogin = document.getElementById('email-login');
 const passwordLogin = document.getElementById('password-login');
 const btnLogin = document.getElementById('btn-login');
@@ -42,9 +40,7 @@ const messageBox2 = document.getElementById('message2');
 
 console.log("Tous les éléments HTML ont été récupérés par le script.");
 
-// ==========================================
-// 🟢 FONCTION CONNEXION
-// ==========================================
+
 btnLogin.addEventListener('click', async () => {
     console.log("--- DÉBUT DE LA TENTATIVE DE CONNEXION ---");
     console.log("Le bouton Connexion a été cliqué !");
@@ -56,7 +52,7 @@ btnLogin.addEventListener('click', async () => {
 
     if (!email || !password) {
         console.log("Échec : Il manque l'email ou le mot de passe.");
-        messageBox1.innerText = "Merci de saisir ton email et ton mot de passe.";
+        messageBox1.innerText = "Please enter your email and password.";
         messageBox1.className = "message error";
         return;
     }
@@ -65,28 +61,24 @@ btnLogin.addEventListener('click', async () => {
         console.log("Envoi de la requête de connexion à Firebase...");
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         
-        // Règle : Si succès, on vide les deux champs
         emailLogin.value = "";
         passwordLogin.value = "";
         
-        messageBox1.innerText = "Connexion validée !";
+        messageBox1.innerText = "Login successful!";
         messageBox1.className = "message success";
         
         console.log("SUCCÈS - Connecté :", userCredential.user.email);
 
     } catch (error) {
-        // Règle : Si erreur, on vide SEULEMENT le mot de passe
         passwordLogin.value = "";
-        messageBox1.innerText = "Erreur : Email ou mot de passe incorrect.";
+        messageBox1.innerText = "Error: Incorrect email or password.";
         messageBox1.className = "message error";
         
         console.error("ÉCHEC - Login error:", error.code, error.message);
     }
 });
 
-// ==========================================
-// 🔵 FONCTION INSCRIPTION
-// ==========================================
+
 btnSignup.addEventListener('click', async () => {
     console.log("--- DÉBUT DE LA TENTATIVE D'INSCRIPTION ---");
     console.log("Le bouton S'inscrire a été cliqué !"); 
@@ -100,7 +92,7 @@ btnSignup.addEventListener('click', async () => {
 
     if (!email || !password || !question || !answer) {
         console.log("Échec : Tous les champs d'inscription ne sont pas remplis.");
-        messageBox2.innerText = "Merci de remplir tous les champs !";
+        messageBox2.innerText = "Please fill in all fields!";
         messageBox2.className = "message error";
         return;
     }
@@ -119,24 +111,20 @@ btnSignup.addEventListener('click', async () => {
             reponse_secrete: answer.toLowerCase()
         });
 
-        // Règle : Si succès, on met le message mais on NE VIDE PAS les champs
-        messageBox2.innerText = "Inscription validée ! Ton compte est créé.";
+        messageBox2.innerText = "Registration successful! Your account has been created.";
         messageBox2.className = "message success";
         
         console.log("SUCCÈS - Utilisateur créé et données enregistrées :", user.email);
 
     } catch (error) {
-        // Règle : Si erreur, on ne vide rien
-        messageBox2.innerText = "Erreur d'inscription : " + error.message;
+        messageBox2.innerText = "Registration error: " + error.message;
         messageBox2.className = "message error";
         
         console.error("ÉCHEC - Erreur d'inscription :", error.code, error.message);
     }
 });
 
-// ==========================================
-// 🟠 FONCTION MOT DE PASSE OUBLIÉ
-// ==========================================
+
 btnForgot.addEventListener('click', async () => {
     console.log("--- TENTATIVE DE RÉINITIALISATION DE MOT DE PASSE ---");
     console.log("Le bouton Mot de passe oublié a été cliqué !");
@@ -146,7 +134,7 @@ btnForgot.addEventListener('click', async () => {
 
     if (!email) {
         console.log("Échec : L'email n'a pas été renseigné dans la case de connexion.");
-        messageBox1.innerText = "Mets ton email dans la case Connexion, puis clique sur Mot de passe oublié.";
+        messageBox1.innerText = "Please enter your email in the Login section, then click on Forgot password.";
         messageBox1.className = "message error";
         return;
     }
@@ -155,21 +143,19 @@ btnForgot.addEventListener('click', async () => {
         console.log("Demande de l'email de réinitialisation à Firebase...");
         await sendPasswordResetEmail(auth, email);
         
-        messageBox1.innerText = "Un email de réinitialisation a été envoyé à " + email;
+        messageBox1.innerText = "A password reset email has been sent to " + email;
         messageBox1.className = "message info";
         
         console.log("SUCCÈS - Email de reset envoyé !");
     } catch (error) {
-        messageBox1.innerText = "Erreur : " + error.message;
+        messageBox1.innerText = "Error: " + error.message;
         messageBox1.className = "message error";
         
         console.error("ÉCHEC - Erreur d'envoi du mail de reset :", error.code, error.message);
     }
 });
 
-// ==========================================
-// 🟣 TES FONCTIONS DE TEST DE BASE DE DONNÉES (inchangées)
-// ==========================================
+// ========================================================
 const testButton = document.getElementById('testbutton');
 const testData = document.getElementById('testdata');
 
@@ -196,13 +182,13 @@ async function sauvegarderScore(score) {
                 date: new Date().toLocaleString()
             });
             console.log("SUCCÈS - Score enregistré en base de données !");
-            alert("Score de " + score + " enregistré dans la Realtime Database !");
+            alert("Score of " + score + " saved to the Realtime Database!");
         } catch (error) {
             console.error("ÉCHEC - Erreur lors de la sauvegarde :", error);
-            alert("Erreur lors de la sauvegarde.");
+            alert("Error saving score.");
         }
     } else {
         console.log("ÉCHEC - Impossible de sauvegarder, aucun utilisateur n'est connecté.");
-        alert("Connecte-toi d'abord !");
+        alert("Please log in first!");
     }
 }
