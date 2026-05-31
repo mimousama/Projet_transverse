@@ -31,7 +31,8 @@ header {
     width: 100%;
     z-index: 1000; 
     display: flex;         
-    justify-content: center;        
+    justify-content: center;    
+
 }
 
 
@@ -120,9 +121,10 @@ main {
     align-items: center;
     gap: 15px;
     padding: 15px 0;
-    font-size: 1.5em;
+    font-size: 3em;
     font-weight: bold;
 }
+
 
 .Intro-home {
     display: flex;
