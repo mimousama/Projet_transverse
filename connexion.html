@@ -9,15 +9,15 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             display: flex;
-            flex-direction: column; /* LA LIGNE MAGIQUE : on empile de haut en bas */
-            align-items: center;    /* On centre les éléments horizontalement */
+            flex-direction: column; 
+            align-items: center; 
             min-height: 100vh;
-            margin: 0px;            /* On enlève les marges pour que le header touche les bords */
+            margin: 0px;         
             padding-bottom: 30px;
             box-sizing: border-box;
         }
 
-        /* Ajoute juste une petite marge sous ton header pour aérer */
+
         header {
             background-color: #76b4d3;
             color: #fffefe;
@@ -26,8 +26,8 @@
             z-index: 1000; 
             display: flex;        
             justify-content: center;  
-            padding: 15px 0;      /* Un peu de padding interne pour faire respirer le logo */
-            margin-bottom: 30px;  /* Espace avant les formulaires */
+            padding: 15px 0;     
+            margin-bottom: 30px; 
             font-size: 1.5em;
         }
 
@@ -38,7 +38,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             max-width: 500px;
             width: 100%;
-            margin: 10px; /* Space between forms */
+            margin: 10px; 
         }
         h2 {
             text-align: center;
@@ -94,8 +94,8 @@
         }
         .forms-wrapper {
             display: flex;
-            flex-wrap: wrap; /* Allows forms to wrap on smaller screens */
-            gap: 20px; /* Space between the two forms */
+            flex-wrap: wrap; 
+            gap: 20px; 
             justify-content: center;
             width: 100%;
         }
@@ -106,7 +106,7 @@
     right: 15px;
     display: flex;
     align-items: center;
-    gap: 10px; /* Espace entre le bouton déconnexion et la pastille */
+    gap: 10px;
 }
 
 .status-badge {
@@ -119,10 +119,10 @@
     padding: 5px 10px;
     border-radius: 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    cursor: pointer; /* Transforme le curseur en main au survol */
+    cursor: pointer; 
 }
 
-/* Style du bouton déconnexion */
+
 .btn-logout {
     background-color: #e74c3c;
     color: white;
@@ -159,31 +159,29 @@
     <header>
         <div class="header">
             <a href="Home.html">Elderisk</a>
-
-
         </div>
     </header>
     <div id="statut-connexion-page" style="display: none; background-color: #e8f5e9; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-family: Arial, sans-serif;">
         <span id="texte-statut-page" style="color: #2e7d32; font-weight: bold; margin-right: 15px;"></span>
-        <button id="btn-logout-page" style="background-color: #d32f2f; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Déconnexion</button>
+        <button id="btn-logout-page" style="background-color: #d32f2f; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Logout</button>
     </div>
     
 
     <div class="forms-wrapper">
 
     <div class="container" id="login-section">
-        <h2>Se connecter</h2>
+        <h2>Log In</h2>
         
-        <label for="email-login">Email :</label>
-        <input type="email" id="email-login" placeholder="Ton adresse email">
+        <label for="email-login">Email:</label>
+        <input type="email" id="email-login" placeholder="Your email address">
         
-        <label for="password-login">Mot de passe :</label>
-        <input type="password" id="password-login" placeholder="Ton mot de passe">
+        <label for="password-login">Password:</label>
+        <input type="password" id="password-login" placeholder="Your password">
         
-        <button id="btn-login">Connexion</button>
+        <button id="btn-login">Log In</button>
         
         <button id="btn-forgot-password" style="background-color: transparent; color: #ff9800; border: none; text-decoration: underline; cursor: pointer; margin-top: 10px;">
-            Mot de passe oublié ?
+            Forgot password?
         </button>
 
         <div id="message1" class="message" style="margin-top: 20px; text-align: center; font-weight: bold;"></div>
@@ -191,36 +189,28 @@
     </div>
 
     <div class="container" id="signup-section">
-        <h2>S'inscrire</h2>
+        <h2>Sign Up</h2>
         
-        <label for="email-signup">Email :</label>
-        <input type="email" id="email-signup" placeholder="Choisis un email">
+        <label for="email-signup">Email:</label>
+        <input type="email" id="email-signup" placeholder="Choose an email">
         
-        <label for="password-signup">Mot de passe :</label>
-        <input type="password" id="password-signup" placeholder="Crée un mot de passe">
+        <label for="password-signup">Password:</label>
+        <input type="password" id="password-signup" placeholder="Create a password">
         
-        <label for="secret-question">Ta question secrète :</label>
-        <input type="text" id="secret-question" placeholder="Ex: Le nom de mon premier chien ?">
+        <label for="secret-question">Your secret question:</label>
+        <input type="text" id="secret-question" placeholder="Ex: The name of my first dog?">
         
-        <label for="secret-answer">La réponse secrète :</label>
-        <input type="text" id="secret-answer" placeholder="Ta réponse">
+        <label for="secret-answer">The secret answer:</label>
+        <input type="text" id="secret-answer" placeholder="Your answer">
         
-        <button id="btn-signup">S'inscrire</button>
+        <button id="btn-signup">Sign Up</button>
 
         <div id="message2" class="message" style="margin-top: 20px; text-align: center; font-weight: bold;"></div>
     </div>
     
     </div>
 
-
-
-
-
-    <!-- Your JavaScript file will go here -->
-    <!-- It's good practice to place script tags at the end of the body for performance -->
-    <!-- Make sure to save your JavaScript code in a file named `script.js` in the same directory -->
     <script type="module" src="Js/script.js"></script> 
     <script type="module" src="Js/auth-check.js"></script>
 </body>
 </html>
->
