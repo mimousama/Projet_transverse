@@ -26,8 +26,9 @@ header a {
     text-decoration: none;
     font-weight: bold;
     padding: 10px 15px;
-    background-color: #629ebc;
+    background-color: #03557e;
     border-radius: 8px;
+    font-size: 1.5em;
 }
 
 footer {
@@ -95,4 +96,20 @@ input[type="radio"] {
     border: none;
     border-radius: 6px;
     font-size: 1em;
+}
+
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #03557e;
+    color: #fffefe;
+    transition: background-color 0.3 ease;
+    margin: 20px;
+    text-decoration-line: none;
+    font-size: 1.5em;
+}
+
+a:hover {
+    background-color: #02223a;
 }
