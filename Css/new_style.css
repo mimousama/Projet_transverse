@@ -190,6 +190,14 @@ main {
 }
 
 .grid-3 img {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Force toutes les images à être des rectangles identiques */
+    object-fit: cover; /* Recadre proprement l'image sans l'écraser ni l'étirer */
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.grid-3 img {
     border-radius: 8px;
     margin-bottom: 15px;
     object-fit: cover;
@@ -202,7 +210,7 @@ main {
 
 .grid-3 p {
     font-size: 0.95em;
-    color: #555;
+    color: #313131;
     line-height: 1.5;
 }
 
