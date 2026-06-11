@@ -76,48 +76,38 @@ ul {
 }
 
 /* Les boutons de navigation en bas */
-#footer {
+#footer, footer {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* Si l'écran est petit, les boutons vont à la ligne */
-    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap; /* Permet aux boutons de passer à la ligne sur petit écran */
+    gap: 25px; /* C'est la ligne magique qui crée l'espace entre les boutons ! */
     margin-top: 30px;
-    margin-bottom: 40px;
+    width: 100%;
 }
 
-#footer a {
+/* Si tu as regroupé tes boutons dans la vraie balise footer au lieu de #footer */
+footer {
+    background-color: #76b4d3;
+    padding: 30px 0;
+    margin-top: auto;
+}
+
+#footer a, footer a {
     display: inline-block;
-    padding: 15px 30px; /* Gros boutons faciles à cliquer */
-    border-radius: 10px;
+    padding: 12px 25px; 
+    border-radius: 8px;
     background-color: #03557e;
     color: #fffefe;
     text-decoration: none;
     font-weight: bold;
     font-size: 1.2em;
     transition: background-color 0.3s ease;
+    margin: 5px; /* Sécurité supplémentaire pour forcer un petit espace */
 }
 
-#footer a:hover {
+#footer a:hover, footer a:hover {
     background-color: #02223a;
-}
-
-/* Le vrai footer tout en bas */
-footer {
-    background-color: #76b4d3;
-    width: 100%;
-    padding: 30px 0;
-    text-align: center;
-    margin-top: auto;
-}
-
-footer a {
-    color: #fffefe;
-    background-color: #03557e;
-    padding: 10px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2em;
 }
 
 .div_correction {
