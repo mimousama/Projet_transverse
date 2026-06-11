@@ -13,6 +13,14 @@
     min-height: 100vh;
 }
 
+/* Le titre principal (Quiz 1) en rouge vif */
+#test_body h1, #test_body h2  {
+    color: #E74C3C; 
+    text-align: center;
+    margin-top: 30px;
+}
+
+
 /* Header & Footer Fixing */
 header {
     background-color: #76b4d3;
@@ -54,63 +62,97 @@ footer {
     max-width: 800px; /* Agrandit un peu la boîte pour la police 22px */
 }
 
-/* Question & Radio Button Alignment */
+
+/* =========================================
+   QUESTIONS & RÉPONSES
+   ========================================= */
 .question-block { 
-    margin-bottom: 25px; 
+    margin-bottom: 35px; /* Un peu plus d'espace entre chaque question */
 }
 
+/* Le texte de la question */
 .question-title { 
     font-weight: bold; 
-    font-size: 1.1em;
-    margin-bottom: 12px; 
+    font-size: 1.2em; /* Un peu plus grand */
+    color: #03557e; /* Question en bleu foncé pour bien ressortir */
+    margin-bottom: 15px; 
 }
 
+/* Les choix de réponses (transformés en belles cartes) */
 .question-block label {
     display: flex;         
     align-items: center;   
-    gap: 12px;             
-    padding: 8px;
-    padding-left: 15%;
+    gap: 15px;             
+    padding: 12px 20px;
+    margin-bottom: 10px; /* Espace entre les réponses */
     cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s;
+    border-radius: 8px;
+    background-color: #f9fbfc; /* Un fond très légèrement bleuté/gris */
+    border: 2px solid #e1e8ed; /* Une bordure douce */
+    transition: all 0.3s ease;
+    color: #2c3e50;
+    font-weight: 500;
 }
 
+/* Effet quand on passe la souris sur une réponse */
 .question-block label:hover {
-    background-color: #f0f7fa;
+    background-color: #eef5f9; /* Le fond devient un peu plus bleu */
+    border-color: #76b4d3; /* La bordure s'allume avec ton bleu clair */
+    transform: translateX(5px); /* Petit effet sympa : la case avance un peu */
 }
 
-/* Ensure radio buttons don't inherit large widths */
+/* Les petits boutons ronds (Radio) */
 input[type="radio"] {
-    width: auto;           
+    width: 22px; /* Plus gros et faciles à cliquer */
+    height: 22px;
     margin: 0;
     cursor: pointer;
+    accent-color: #03557e; /* Colore l'intérieur du bouton en bleu au lieu de noir ! */
 }
 
-/* Submit Button */
+/* =========================================
+   BOUTON DE VALIDATION
+   ========================================= */
 #submit-btn { 
-    margin-top: 15px;
+    margin-top: 25px;
     width: 100%;
-    padding: 12px;
-    background-color: #03557e; /* Bouton mis en bleu au lieu du vert */
+    padding: 15px;
+    background-color: #03557e; 
     color: #fffefe; 
     border: none;
-    border-radius: 6px;
-    font-size: 1em;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(3, 85, 126, 0.2); /* Petite ombre bleue */
 }
 
-a {
+#submit-btn:hover {
+    background-color: #02223a; /* Devient plus foncé au survol */
+}
+
+/* =========================================
+   FIX : BOUTONS CORRECTION ET FOOTER
+   ========================================= */
+/* Cible les liens dans le footer et les liens isolés en bas de page */
+footer a, 
+#test_body > a {
     display: inline-block;
-    padding: 10px 20px;
-    border-radius: 10px;
+    padding: 12px 25px;
     background-color: #03557e;
-    color: #fffefe;
-    transition: background-color 0.3s ease; /* Ajout du 's' manquant pour les secondes */
-    margin: 20px;
-    text-decoration-line: none;
-    font-size: 1.5em;
+    color: #ffffff !important; /* Force le texte en blanc et écrase le violet */
+    text-decoration: none !important; /* Enlève le soulignement classique */
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 20px 10px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Petite ombre douce */
 }
 
-a:hover {
+/* Effet de survol pour ces boutons */
+footer a:hover, 
+#test_body > a:hover {
     background-color: #02223a;
 }

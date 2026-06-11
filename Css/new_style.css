@@ -83,32 +83,53 @@ section{
 #footer a {
     font-size: 2.5vw ;
 }
-.div_course:first-of-type{
+/* =========================================
+   PAGES DE COURS (Thème Neutre & Titres Rouges)
+   ========================================= */
+.div_course:first-of-type {
     display: flex;
     justify-content: center;
+    background: transparent; 
+    box-shadow: none;
+    border: none;
 }
 
-.div_course{
-    margin-bottom: 20px;
-    background-color: #ffffff;
+.div_course {
+    margin-bottom: 30px;
+    background-color: #ffffff; /* Fond blanc pur et classique */
     border-radius: 12px;
-    padding: 2%;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Ombre douce et neutre */
 }
 
+/* Le grand titre en ROUGE */
+.div_course h1 {
+    color: #E74C3C; /* Rouge vif pour attirer l'attention */
+    margin-top: 0;
+}
+
+.div_course h2 {
+    color: #3c90ba; /* Rouge vif pour attirer l'attention */
+    margin-top: 0;
+}
+
+/* Les petits sous-titres en gris très foncé pour contraster */
+.div_course h3 {
+    color: #03557e; 
+}
+
+/* Fait ressortir les mots importants en gras (sans utiliser de bleu) */
+.div_course strong, .div_course b {
+    color: #03557e; 
+}
 
 .div_course img {
     max-width: 50%;
     height: auto;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    margin-bottom: 15px;
 }
-
-.div_correction{
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 2%;
-    margin-bottom: 20px;
-}
-
 
 
 main {
@@ -134,7 +155,7 @@ main {
     align-items: center;
     justify-content: space-between;
     gap: 40px;
-    background: white;
+    background: #ffffff;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
@@ -142,7 +163,7 @@ main {
 }
 
 .Intro-home h1 {
-    color: #2c3e50;
+    color: #03557e; /* Rouge vif pour le titre principal */
     margin-top: 0;
 }
 
@@ -205,7 +226,7 @@ main {
 
 .grid-3 h3 {
     margin: 10px 0;
-    color: #2c3e50;
+    color: #03486a;
 }
 
 .grid-3 p {
